@@ -1,0 +1,17 @@
+TARGET := ../bin/arm/zmq_sub_pub
+CC := arm-oe-linux-gnueabi-gcc -march=armv7-a -mfloat-abi=softfp -mfpu=neon
+INCLUDE:= -I ../include
+
+LIBS:= -L ../lib/arm/ -Wl,-Bstatic -lzmq  -Wl,-Bdynamic -lpthread -lstdc++ -lm
+
+CSRCS := $(wildcard *.c)
+OBJS := $(patsubst %.c, %.o, $(CSRCS))
+
+$(TARGET): $(OBJS) 
+	$(CC) $+ -o $@  $(LIBS)
+%.o:%.c
+	$(CC) -c -g $< -o $@ $(INCLUDE)
+
+clean:
+	rm -rf $(OBJS) $(TARGET)
+	#rm *.o
