@@ -2,9 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "zmq.h"
-//由于ZMQ是基于CS模型的网络通讯库
-//订阅端做服务端、允许一个进程订阅多个频道、但是一个频道只能允许一个进程订阅
-//发布端做服务端、允许多个进程订阅同一个频道、但是同一个进程只能订阅一个频道
+
 int main(int argc, char *argv[])
 {		
     if(argc >= 4 && !strcmp("-sub",argv[2])) // 如果是订阅
